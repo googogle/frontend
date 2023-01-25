@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <ul class = "ultagClass">
+        <li>UL title111</li>
+        <li>UL title222</li>
+        <li>UL title333</li>
+    </ul>
+
+    <ol class = 'menu'>
+        <li>OL title111</li>
+        <li>OL title222 </li>
+        <li>OL title333 </li>
+    </ol>
+
+ 
+
+    <script>
+
+        //ulTag 리스트 맴버를 클릭할 때마다 랜덤색으로 배경 색 변경
+        var ulTag = document.getElementsByClassName("ultagClass");
+        var ulList = ulTag[0].getElementsByTagName("li");
+        console.log(ulList);
+        
+        //onclick 내의 this는 ulList[i]
+        //liList의 모든 요소에 이벤트 핸들러 한번에 추가
+        for (var i= 0 ; i < ulList.length ; i++){
+            ulList[i].onclick = function(event){
+                var colorcode = Math.round(Math.random()*0xffffff).toString(16);
+                console.log(event.target.innerText);
+                document.bgcolor = colorcode;
+            }
+        }
+
+
+        //olTag 내의 모든 li요소를 선택해서 liList가 참조
+        //getElementsByTagName은 List를 반환
+        var olTag = document.getElementsByClassName("menu");
+        console.log(olTag);
+        var liList = olTag[0].getElementsByTagName("li");
+        console.log(liList);
+        console.log(liList[0]);
+        console.log(liList[1]);
+        console.log(liList[2]);
+
+        for (var i= 0 ; i < liList.length ; i++){
+            liList[i].onclick = function(event){
+                console.log(event.target.innerText);
+            }
+        }
+       
+
+
+    </script>
+</body>
+
+</html>

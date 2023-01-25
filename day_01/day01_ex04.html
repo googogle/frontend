@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <ul>
+        <li>11111</li>
+        <li>22222</li>
+        <li>33333</li>
+        <li>44444</li>
+    </ul>
+
+    <script>
+        //자바스크립트는 홑따옴표 쌍따옴표 구분 x
+        //자바스크립트 객체는 캡슐화 x , 필요한 속성을 객체에 임의로 추가 가능.
+        var colors = ['red','green','yellow','blue'];
+        var lis = document.getElementsByTagName("ul")[0].getElementsByTagName("li");
+        console.dir(lis);
+
+        for(var i = 0 ; i < lis.length ; i++) {
+            console.log(lis[i]);
+            //lis[i].style.color = colors[i];
+            lis[i].i = i;
+            lis[i].onclick = function(event){
+                this.style.backgroundColor = colors[i];
+            }
+    }
+    </script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        #box{
+            width : 100px;
+            height: 100px;
+            border :2px solid red;
+            background-color: yellow;
+            /*left는 요소가 레이어여야 작동. position*/
+            position: relative;
+            left:0px;
+            
+        }
+    </style>
+</head>
+<body>
+    <button id = playBtn> Play</button>
+    <div id = box> Box</div>
+
+    <script>
+        var playBtn = document.getElementById("playBtn");
+        var Box = document.getElementById("box");
+        playBtn.onclick = function(event){
+            Box.style.left = "300px";
+        }
+
+    </script>
+</body>
+</html>
