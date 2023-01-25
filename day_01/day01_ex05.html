@@ -20,14 +20,33 @@
     </style>
 </head>
 <body>
-    <button id = playBtn> Play</button>
+    <button id = btn1>0,0</button>
+    <button id = btn2>0,300</button>
+    <button id = btn3>300,0</button>
+    <button id = btn4>300,300</button>
+
     <div id = box> Box</div>
 
     <script>
-        var playBtn = document.getElementById("playBtn");
-        var Box = document.getElementById("box");
-        playBtn.onclick = function(event){
-            Box.style.left = "300px";
+        var btn1 = document.getElementById("btn1");
+        var btn2 = document.getElementById("btn2");
+        var btn3 = document.getElementById("btn3");
+        var btn4 = document.getElementById("btn4");
+        var box = document.getElementById("box");
+        var btnArr = [btn1, btn2, btn3, btn4];
+        var positionArr = [];
+      
+        //for 문을 사용한 클릭이벤트 설정, Math객체 함수를 이용하여 랜덤색삭 적용
+        for(i = 0 ; i < 4 ; i ++){ 
+            btnArr[i].onclick = function(event){
+                var colorcode = "#"+(parseInt(Math.random()*0xffffff)).toString(16);
+                positionArr = this.innerText.split(',');
+                box.style.left = positionArr[0] + 'px';
+                box.style.top = positionArr[1] + 'px';
+                box.style.backgroundColor = colorcode;
+                console.log("box position = " + positionArr[0] + ' , ' + positionArr[1]);
+                console.log('colorcode = ' + colorcode);
+            }
         }
 
     </script>
