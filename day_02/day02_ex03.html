@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #nav > ul {
+            list-style: none;
+            border : 0px solid red;
+            overflow: hidden;
+            width: 1000px;
+            padding: 5px;   
+        }
+        #nav li{
+            border-top: 1px solid #000;
+            border-bottom: 1px solid #000;
+            border-left: 0px solid #000;
+            border-right: 0px solid #000;
+            color : red;
+            width : 100px;
+            height: 50px;
+            /*display: inline-block;*/
+            display: block;
+            float : left;
+            text-align: center;
+            line-height:50px;
+            box-sizing: border-box;
+
+        }
+        /*:: -> 가상선택자*/
+        #nav li:hover{
+            background-color: green;
+        }
+        h1{
+            text-align: center;
+            width: 1000px;
+        }
+        div#page{
+            width: 1000px;
+            /*좌우가 모두 auto이면 가운데정렬*/
+            margin  : 0 auto ;
+        }
+    </style>
+
+</head>
+<body>
+    <div id = "page">
+        <div id = "head">
+            <h1>test page</h1>
+            <div id = "nav">
+                <ul>
+                    <li>Home</li>
+                    <li>Profile</li>
+                    <li>Gallery</li>
+                    <li>Lecture</li>
+                    <li>Board</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

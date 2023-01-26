@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        #box{
+            width : 100px;
+            height: 100px;
+            border :2px solid red;
+            background-color: yellow;
+            /*left는 요소가 레이어여야 작동. position*/
+            position: relative;
+            left:0px;
+            transition: all 0.5s cubic-bezier(.17,.67,.83,.67);
+            
+        }
+        #btnGroup{
+            width: 250px;
+        }
+        #btnGroup button {
+            width: 100px;
+            height: 30px;
+            margin: 5px 5px;
+        }
+        /*botton 태그의 dataset을 이용해서 스타일 적용*/
+        button[data-x = "200"]{
+            background-color: red;
+        }
+    </style>
+    
+</head>
+<body>
+    <div id ="btnGroup">
+        <!--dataset에 좌표 설정-->
+        <button data-x = "0" data-y = "0" class = btn>좌상</button>
+        <button data-x = "200" data-y = "0" class = btn>우상</button>    
+        <button data-x = "0" data-y = "200" class = btn>좌하</button>
+        <button data-x = "200" data-y = "200" class = btn>우하</button>
+    </div>
+    <div id = box> Box</div>
+
+    <script>
+        var colors = ['blue','orange','brown','pink'];
+        var playBtnArr = document.getElementsByClassName("btn");
+        var box = document.getElementById("box");
+        console.log(playBtnArr);
+
+        for(var cnt=0; cnt<playBtnArr.length; cnt++) {
+            playBtnArr[cnt].color = colors[cnt];
+            playBtnArr[cnt].onclick = function(event) {
+                box.style.left = this.dataset.x + "px";
+                box.style.top = this.dataset.y + "px";
+                document.body.style.backgroundColor = this.color;
+            }
+        }
+    </script>
+
+</body>
+</html>
