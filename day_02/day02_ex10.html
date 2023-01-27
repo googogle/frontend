@@ -30,10 +30,10 @@
             var oper = document.querySelector("#oper").value;
             var num1 = Number(document.getElementById("num1").value);
             var num2 = Number(document.getElementById("num2").value);
-            if(oper == '+') result.innerText = "결과 : " + (num1 + num2);
+            if(oper == '+') result.innerText = "결과 : " +  Math.abs((num1 + num2));
             else if(oper == '-') result.innerText = "결과 : " + Math.abs((num1 - num2));
-            else if(oper == '*') result.innerText = "결과 : " + (num1 * num2);
-            else if(oper == '/') result.innerText = "결과 : " + (num1 / num2);
+            else if(oper == '*') result.innerText = "결과 : " +  Math.abs((num1 * num2));
+            else if(oper == '/') result.innerText = "결과 : " +  Math.abs((num1 / num2));
         }
         
     </script>

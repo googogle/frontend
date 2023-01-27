@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<!-- inline > internal > external -->
+<body>
+    <div class="container">
+        <h1 style="background-color:red; color: yellow;">사원 목록</h1>
+        <p>사원 검색 <input type="text" id="search"> <input type="submit", id="inputSubmit" value="search"></p>
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th><input type="checkbox" id="allCheck"></th>
+                    <th>번호</th>
+                    <th>사진</th>
+                    <th>사원명</th>
+                    <th>부서</th>
+                    <th>직급</th>
+                    <th>수정</th>
+                    <th>삭제</th>
+                </tr>
+            </thead>
+            <tbody id="rows_area"></tbody>            
+        </table>
+    </div>
+
+    <script>
+        var searchBtn = document.getElementById("inputSubmit");
+        var tmpData = "";
+        var saram = [{
+            "no":1,
+            "img": "../../imgs/image_1.jpeg",
+            "name":"과장 1",
+            "dept":"관리부",
+            "position":"과장"
+        },{
+            "no":2,
+            "img": "../../imgs/image_2.jpeg",
+            "name":"사원 1",
+            "dept":"생산부",
+            "position":"사원"   
+        },{
+            "no":3,
+            "img": "../../imgs/image_1.jpeg",
+            "name":"팀장 1",
+            "dept":"관리부",
+            "position":"팀장"
+        }
+    ]
+
+        //var rowTmpStr = document.querySelector("#rowTemp").innerHTML;
+        for(var i = 0; i<saram.length; i ++){
+            tmpData += `<tr align="center">
+                <td><input type="checkbox" class="check"></td>
+                <td>${saram[i].no}</td>
+                <td><img src=${saram[i].img} width="100"/></td>
+                <td>${saram[i].name}</td>
+                <td>${saram[i].dept}</td>
+                <td>${saram[i].position}</td>
+                <td><input type="button" value="수정"></td>
+                <td><input type="button" value="삭제"></td>
+            </tr>`
+    }
+
+    
+        document.getElementById("rows_area").innerHTML = tmpData;
+
+        searchBtn.onclick = function(event){
+            tmpData = "";
+            var searchText = document.getElementById("search").value;
+            for (var i = 0; i < saram.length; i++){
+                if(searchText == saram[i].name || searchText == saram[i].dept || searchText == saram[i].position || searchText == saram[i].no){
+                    tmpData += `<tr align="center">
+                <td><input type="checkbox" class="check"></td>
+                <td>${saram[i].no}</td>
+                <td><img src=${saram[i].img} width="100"/></td>
+                <td>${saram[i].name}</td>
+                <td>${saram[i].dept}</td>
+                <td>${saram[i].position}</td>
+                <td><input type="button" value="수정"></td>
+                <td><input type="button" value="삭제"></td>
+            </tr>`
+                }
+            }
+            document.querySelector("#rows_area").innerHTML = tmpData;
+        }
+        var isChecked = document.getElementsByClassName("check");
+        console.log(isChecked);
+    </script>
+</body>
+</html>
