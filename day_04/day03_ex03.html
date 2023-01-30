@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #form1 input[type = text], #form1 textarea {
+            border: none;
+            border-bottom: 2px solid blue;
+            background-color: aqua;
+            width: 300px;
+        }
+
+        th{text-align: left;}
+    </style>
+    <script>
+        //function이나 var로 선언하면 window의 멤버 필드에 추가됨
+        //이벤트 핸들러의 첫번째 인자는 이벤트 객체임
+        function validateForm(event){
+            //form의 가본은 페이지 전환. 이벤트의기본 기능을 일시중지 가능.
+            //이벤트는 이벤트 핸들러 함수에서 자동생성됨.
+            //event.preventDefault(); // 이벤트 일시 중지
+            
+            form = event.target;
+            event.preventDefault();
+            if(form == null) form = this;
+            if(form.subject.value == ""){
+                alert("제목을 입력해주세요.")
+                form.subject.focus();
+                return false;
+            }
+            if(form.writer.value == ""){
+                alert("글쓴이를 입력해주세요.")
+                form.subject.focus();
+                return false;
+            }
+            if(form.writer.value.length<2){
+                alert("글쓴이 이름은 두글자 이상 입력하세요.")
+                form.subject.focus();
+                return false;
+            }
+
+        }
+
+    </script>
+</head>
+<body>
+    <h1>test</h1>
+    <form action="" id="form1">
+        <table>
+            <tr>
+                <th>title</th>
+                <td><input type="text" name ="subject"></td>
+            </tr>
+            <tr>
+                <th>name</th>
+                <td><input type="text" name="writer"></td>
+            </tr>
+            <tr>
+                <th>content</th>
+                <td>
+                    <textarea name="content" id="" cols="30" rows="10">    
+                    </textarea>
+                </td>   
+            </tr>
+            <tr>
+                <th></th>
+                <td><input type="submit" value="save"></td>
+            </tr>
+        </table>
+    </form>
+    <script>    
+    var form1 = document.getElementById("form1")
+    //form1.onsubmit = function(){
+    //    validateForm(this);
+    //}
+    form1.onsubmit = validateForm; //참조시킬 경우엔 괄호 생략
+        
+    </script>
+</body>
+</html>
+

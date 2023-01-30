@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        *{
+            padding :0px;
+            margin :0px;
+        }
+        .container {
+            border : 1px solid brown;
+            background-color: red;
+        }
+
+        .container ul {
+            list-style: none;
+        }
+        .container>div{
+            padding :3px;
+            margin : 3px;
+            border : 2px solid rosybrown;
+            overflow: hidden;
+            background-color: green;
+        }
+        .top div{
+            background-color: black;
+            height: 100px;
+        }
+        .top ul{
+            height: 45%;
+            border :1px solid black;
+            margin : 1 1 1 1 ;
+            background-color: rgb(139, 202, 202);
+            padding : 2px;
+        }
+        
+        .middle div{
+            height: 300px;
+            width: 33.3%;
+            float: left;
+            position: relative;
+            overflow: hidden;
+            background-color: aquamarine;
+        }
+
+        .middle div ul{
+            height: 70px;
+            border : 1px solid blueviolet;
+            margin : 3px;
+            background-color: darkgrey;
+        }
+
+        .bottom div{
+            height: 150px;
+            background-color: darksalmon    ;
+        }
+
+        .middle div:nth-child(3)>ul:nth-child(1){
+            height: 30%;
+        }
+        .middle div:nth-child(3)>ul:nth-child(2){
+            height: 68%;
+        }
+
+    </style>
+</head>
+<body>
+    <div class ="container">
+        <div class ="top">
+            <div>
+                <ul>top1</ul>
+                <ul>top2</ul>
+            </div>
+        </div>
+        <div class ="middle">
+            <div>
+                <ul>middle1-1</ul>
+                <ul>middle1-2</ul>
+                <ul>middle1-3</ul>
+                <ul>middle1-4</ul>
+                <ul>middle1-5</ul>
+            </div>
+            <div>
+                <ul>midele2-1</ul>
+                <ul>midele2-2</ul>
+                <ul>midele2-3</ul>
+                <ul>midele2-4</ul>
+            </div>
+            <div>
+                <ul>middle3-1</ul>
+                <ul>middle3-2</ul>
+            </div>
+        </div>
+        <div class ="bottom">
+            <div>
+                bottom
+            </div>
+        </div>
+    </div>
+</body>
+</html>
