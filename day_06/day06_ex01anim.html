@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #box{
+            height: 100px;
+            width: 100px;
+            background-color: red;
+            animation-name: anim-box;
+            animation-duration: 3s;
+            animation-iteration-count: 3;
+        }
+        /*@keyframes anim-box {
+            from{background-color : red}
+            to {background-color : white}
+        }*/
+
+        @keyframes anim-box {
+            0%{background-color: aqua;}
+            50%{background-color: brown;}
+            100%{background-color: chartreuse;}            
+        }
+
+        @media screen and (min-width :601px){
+            body { background-color: gray;}
+        }
+        @media screen and (max-width : 600px){
+            body { background-color: black;}
+        }
+
+    </style>
+
+</head>
+<body>
+    <div id = "box">
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        div.container div {
+            padding: 3px;
+            margin : 3px;
+            border: 1px solid red;
+            border-radius: 7px;
+            width: 900px;
+            overflow: hidden;
+        }
+        .header nav li {
+            float: left;
+            width: 150px;
+            height: 50px;
+            border: 1px solid gray;
+            list-style: none;
+        }
+        div.middle  div {
+            width: 150px;
+            float: left;
+            height: 200px;
+        }
+        div.middle div.center {
+            width: 550px;
+        }
+        div.footer div{
+            clear: both;
+            height: 80px;
+            width: 687px;
+        }
+        div.center > div {
+            height: 80px;
+            width: 260px;
+        }
+        div.center div:nth-child(1) {
+            width: 530px; 
+        }
+
+        @media screen and (max-width: 990px) {
+            body {
+                background-color: azure;
+            }
+            div.container >div {
+                width: 700px;
+                height: auto;
+                position: relative;
+                float : left;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <nav calss ="navbar-light">
+        <div class="container">
+            <div class="header">
+                <h1>범준샘의 코딩교실</h1>
+                <nav>
+                    <ul>
+                        <li>HOME</li>
+                        <li>PROFILE</li>
+                        <li>GALLERY</li>
+                        <li>LECTURE</li>
+                        <li>BOARD</li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="middle">
+                <div class="left"></div>
+                <div class="center">
+                    <div>banner</div>
+                    <div>section1</div>
+                    <div>section2</div>
+                </div>
+                <div class="right"></div>
+            </div>
+            <div class="footer">
+                <div></div>    
+            </div>
+        </div>
+    </nav>
+</body>
+</html>
