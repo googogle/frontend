@@ -1,0 +1,15 @@
+<script>
+    var count = 0;
+    // var는 범위가 함수 단위이다.
+    function addCount() {
+        // 함수에서 var로 선언하면 함수 범위에서만 사용.
+        // var를 생략하면  window의 필드가 된다.
+        //count = 0;
+        count=count+1;
+    }
+    addCount();
+    addCount();
+    addCount();
+
+    console.log(count); //count is not defined
+</script>
