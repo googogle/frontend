@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="number" id="n1">
+    <input type="number" id="n2">
+    <input type="number" id="n3"><br/>
+    <input type="button" id="resultBtn" value="확인">
+    <div id = "result"></div>
+
+
+     
+    <script>
+        //3항연산자를 활용하여 숫자 3개 비교
+        var resultBtn = document.getElementById("resultBtn");
+        var result = document.getElementById("result");
+        var tmpHTML = "";
+
+        resultBtn.addEventListener("click", function(event){
+            var max = 0;
+            var min = 0;
+            var num1 = Number(document.getElementById("n1").value);
+            var num2 = Number(document.getElementById("n2").value);
+            var num3 = Number(document.getElementById("n3").value);
+
+            max = num1 > num2 ? (num1 > num3 ? num1 : num3) : (num2 > num3 ? num2 : num3);
+
+            min = num1 < num2 ? (num1 < num3 ? num1 : num3) : (num2 < num3 ? num2 : num3);
+            
+            console.log(num1, num2, num3);
+            tmpHTML +=`----- 3항연산자 -----<br/>최대값 : ${max} <br/>최소값 : ${min}<br/><br/>`;
+
+            //Math 클래스와 Array 활용
+            var max_f = 0;
+            var min_f = 0;
+            var nArray = [num1, num2, num3];
+            console.log(nArray);
+            max_f = Math.max.apply(Math, nArray);
+            min_f = Math.min.apply(Math, nArray);
+
+            console.log(max_f, min_f);
+
+            tmpHTML +=`----Math클래스 함수로 구현 ----<br/>최대값 : ${max_f} <br/>최소값 : ${min_f}<br/><br/><br/>`;
+            result.innerHTML = tmpHTML;
+
+        });
+    </script>
+</body>
+</html>

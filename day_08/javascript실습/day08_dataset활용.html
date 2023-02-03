@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        button{
+            width: 45px;
+        }
+    </style>
+</head>
+<body>
+    <h1></h1>
+    <div id="monthBtns">
+        <button data-month="1" data-days ="31">1월</button>
+        <button data-month="3" data-days ="28">2월</button>
+        <button data-month="3" data-days ="31">3월</button>
+        <button data-month="4" data-days ="30">4월</button>
+        <button data-month="5" data-days ="31">5월</button>
+        <button data-month="6" data-days ="30">6월</button>
+        <button data-month="7" data-days ="31">7월</button>
+        <button data-month="8" data-days ="31">8월</button>
+        <button data-month="9" data-days ="30">9월</button>
+        <button data-month="10" data-days ="31">10월</button>
+        <button data-month="11" data-days ="30">11월</button>
+        <button data-month="12" data-days ="31">12월</button>
+    </div>
+    <div id="demo"></div>
+    <!-- switch ~ case문으로 구현 해 본다. -->
+
+    <script>
+        var demo = document.getElementById("demo");
+        var btns = document.querySelectorAll("div#monthBtns > button");
+        console.log(btns);
+
+        btns.forEach((btn,index)=>{
+            console.log(btn);
+            btn.addEventListener('click',function(){
+                demo.innerHTML = `<br/>${btn.dataset.month}월은 ${btn.dataset.days}일입니다.`
+            })
+        });
+    </script>
+</body>
+</html>
