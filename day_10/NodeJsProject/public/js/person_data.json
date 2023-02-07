@@ -1,8 +1,8 @@
 {
     "personList" : [
-        {"no" : 1, "name" : "Lee", "e-mail": "aaa"},
-        {"no" : 2, "name" : "Park", "e-mail": "bbb"},
-        {"no" : 3, "name" : "Kwon", "e-mail": "ccc"},
-        {"no" : 4, "name" : "Kim", "e-mail": "ddd"}
+        {"no" : 1, "name" : "Lee", "email": "aaa"},
+        {"no" : 2, "name" : "Park", "email": "bbb"},
+        {"no" : 3, "name" : "Kwon", "email": "ccc"},
+        {"no" : 4, "name" : "Kim", "email": "ddd"}
     ]
 }

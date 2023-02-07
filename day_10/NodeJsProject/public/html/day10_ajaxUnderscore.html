@@ -11,9 +11,9 @@
 <body>
     <h1>jsDAy05Ex02_2</h1>
     <div id="demo">
-        Ajax기술로 saram_data.json파일의 내용을 로드한다.
+        Ajax기술로 json파일의 내용을 로드한다.
     </div>
-    <p><button id="loadBtn">Laod Button</button></p>
+    <p><button id="loadBtn">Load Button</button></p>
 
     <script type="text/template" id="saramListTemp">
         <table border="1" width="100%">
@@ -23,12 +23,12 @@
                 <th>이메일</th>
             </tr>
         <%
-        for(var row of saramList) {
+        for(var row of personList) {
         %>
             <tr>
                 <td><%=row.no%></td>
                 <td><%=row.name%></td>
-                <td><%=row.e-mail%></td>
+                <td><%=row.email%></td>
             </tr>
         <% } // end of for %>
         </table>
@@ -51,9 +51,8 @@
         loadBtn.addEventListener("click", (event)=>{
             // 외부에 myGetAjax 함수를 만들어서 활용.
             // xhr을 인자로 받아서 사용
-            myGetAjax("http://localhost:3000/js/person_data.json", function(xhr) {
+            myGetAjax("../js/person_data.json", function(xhr) {
                 let personList = JSON.parse(xhr.responseText)["personList"];
-                console.log(JSON.parse(xhr.responseText)["personList"]);
                 let compile = _.template(saramListTemp.innerHTML);
                 let html = compile({personList});
                 console.log(xhr.responseText);

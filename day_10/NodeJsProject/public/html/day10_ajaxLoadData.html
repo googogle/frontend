@@ -10,9 +10,9 @@
 <body>
     <h1>jsDAy05Ex02_2</h1>
     <div id="demo">
-        Ajax기술로 saram_data.json파일의 내용을 로드한다.
+        Ajax기술로 json파일의 내용을 로드한다.
     </div>
-    <p><button id="loadBtn">Laod Button</button></p>
+    <p><button id="loadBtn">Load Button</button></p>
 
     <script>
         var demo = document.getElementById("demo");
@@ -25,7 +25,7 @@
                 console.log(JSON.parse(xhr.responseText));
                 console.log(JSON.parse(xhr.responseText)["personList"]);
             };
-            xhr.open("GET", "http://localhost:3000/js/person_data.json", true);
+            xhr.open("GET", "../js/person_data.json", true);
             xhr.send();
         });
     </script>

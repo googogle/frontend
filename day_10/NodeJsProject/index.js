@@ -8,6 +8,19 @@ app.use(express.static('public'));
 app.set("view engine", "ejs");
 app.set("views", "./template");
 
+const personList = [
+        {"no" : 1, "name" : "Lee", "email": "aaa"},
+        {"no" : 2, "name" : "Park", "email": "bbb"},
+        {"no" : 3, "name" : "Kwon", "email": "ccc"},
+        {"no" : 4, "name" : "Kim", "email": "ddd"},
+        {"no" : 5, "name" : "TEST", "email": "TEST"},
+        {"no" : 6, "name" : "TEST2", "email": "TEST2"}
+    ];
+
+app.get("/person/list", (req,res)=>{
+    res.send({personList}); //== {personList : personList}
+});
+
 app.get("/", (req, res)=>{
     //res.writeHead(200, {"Content-Type":"text/html; charset=UTF-8"});
     //res.write("<h1>환영합니다!</h1>");

@@ -9,17 +9,16 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.13.6/underscore-min.js" integrity="sha512-2V49R8ndaagCOnwmj8QnbT1Gz/rie17UouD9Re5WxbzRVUGoftCu5IuqqtAM9+UC3fwfHCSJR1hkzNQh/2wdtg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 <body>
-    <h1>jsDAy05Ex02_5</h1>
+    <h1>Day10 assignment</h1>
     <form id="inputForm" action="" method="get">
-        Name : <input type="text" value="test2"> <br/>
-        Email : <input type="text" value="test2@saram.com"> <br/>
-        Phone : <input type="text" value="010-2222-2222"> <br/>
+        Name : <input type="text" value="test2", id = "name"> <br/>
+        Email : <input type="text" value="test2@saram.com", id =  "email"> <br/>
         <input type="submit" value="SAVE">
     </form>
     <div id="demo">
-        Ajax기술로 saram_data.json파일의 내용을 로드한다.
+        Ajax기술로 json파일의 내용을 로드한다.
     </div>
-    <p><button id="loadBtn">Laod Button</button></p>
+    <p><button id="loadBtn">Load Button</button></p>
 
     <script type="text/template" id="saramListTemp">
         <table border="1" width="100%">
@@ -27,16 +26,14 @@
                 <th>번호</th>
                 <th>이름</th>
                 <th>이메일</th>
-                <th>전화</th>
             </tr>
         <%
-        for(var row of saramList) {
+        for(var row of personList) {
         %>
             <tr>
                 <td><%=row.no%></td>
                 <td><%=row.name%></td>
                 <td><%=row.email%></td>
-                <td><%=row.phone%></td>
             </tr>
         <% } // end of for %>
         </table>
@@ -47,7 +44,7 @@
         var saramListTemp = document.getElementById("saramListTemp");
         var inputForm = document.getElementById("inputForm");
         
-        // 라이버리의 Ajax로 대체 되는 함수 : axios, jQuery ajax
+        // 라이브러리의 Ajax로 대체 되는 함수 : axios, jQuery ajax
         var myGetAjax = (srcUrl, callback) => {
             const xhr = new XMLHttpRequest();
             xhr.onload = (event) => {
@@ -62,17 +59,34 @@
             event.preventDefault(); // 기본 기능 중지.
             let form = event.target;
             // form의 데이터를 읽어온다.
-            // myGetAjax를 이용해서 서버에 전송한다.
+
             // 결과를 json으로 받아서 화면 갱신한다.
+
+            // myGetAjax를 이용해서 서버에 전송한다.
+            myGetAjax("/person/list", function(xhr){
+                let personList = JSON.parse(xhr.responseText)["personList"];
+                console.log(personList);
+                let newPerson = {
+                    no : personList.length+1,
+                    name : form.name.value,
+                    email : form.email.value
+                }
+                personList[personList.length] = newPerson;
+                console.log(personList);
+                let compile = _.template(saramListTemp.innerHTML);
+                let html = compile({personList});
+                demo.innerHTML = html;
+            });
+
             
         });
 
         loadBtn.addEventListener("click", (event)=>{
             // index.js에 "/saram/list" 요청 구현.
-            myGetAjax("http://localhost:3000/saram/list", function(xhr) {
-                let saramList = JSON.parse(xhr.responseText)["saramList"];
+            myGetAjax("http://localhost:3000/person/list", function(xhr) {
+                let personList = JSON.parse(xhr.responseText)["personList"];
                 let compile = _.template(saramListTemp.innerHTML);
-                let html = compile({saramList});
+                let html = compile({personList});
                 demo.innerHTML = html;
             });
         });
