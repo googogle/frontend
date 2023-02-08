@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script
+    src="https://code.jquery.com/jquery-3.6.3.min.js"
+    integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
+    crossorigin="anonymous">
+    </script>
+    <script>
+        //문서 내의 object들을 jquary onject로 변경시킴. jquary 진입점.
+        $(document).ready(function(){
+            $("#btn").on("click", function(){
+                alert("btn click");
+            });
+            //한번에 List 형태의 여러 요소에 이벤트 적용.
+            $(".colorBtn").on("click", function(){
+                //document.body.style.backgroundColor = this.value;
+                // $() DOM객체를 인자로 넣어주면 바로 jQuary객체로 바뀜.
+                $("body").css("backgroundColor", $(this).text());
+            });
+        });
+    </script>
+</head>
+<body>
+    <button id = "btn">click me</button><br/>
+    <div id = "buttons">
+        <button id = "blueBtn" class = "colorBtn" value = "blue">BLUE</button><br/>
+        <button id = "redBtn" class = "colorBtn" value = "red">RED</button><br/>
+        <button id = "greenBtn" class = "colorBtn" value = "green">GREEN</button><br/>
+    </div>
+    <script>
+        var btn = document.getElementById("btn");
+
+        //DOM을 jQuary에 넣어줌.jQuary객체로 변환
+        var $btn = $(btn);
+        //jQuary와 기존 DOM을 변환해가면서 사용 가능
+        var btnDOM = $(btn)[0];
+        console.log(btnDOM);
+    </script>
+
+    <ul>
+        <li>AAAAA</li>
+        <li>AAAA</li>
+        <li>AAA</li>
+        <li>AA</li>
+        <li>A</li>
+    </ul>
+    <script>
+        $("ul>li").on("click", function(event){
+            console.log(event);
+        });
+    </script>
+
+</body>
+</html>
