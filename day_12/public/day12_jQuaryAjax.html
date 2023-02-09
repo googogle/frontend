@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="http://code.jquery.com/jquery.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id = "demo">
+        <h1>TESTPAGE</h1>
+    </div>
+    <div>
+        <button id = "loadBtn">Load</button>
+    </div>
+    <script>
+        // jQuery의 Ajax기능 : load(), get(). post(). ajax(). getJSON().
+        $(document).ready(function(){
+            //load() => ajax와 innerHTML기능이 합쳐진 함수
+            $("#loadBtn").on("click", function(resp, status, xhr){
+                $("#demo").load("load_data.txt");
+                console.log(resp, status, xhr);
+            });
+        });
+    </script>
+</body>
+</html>
