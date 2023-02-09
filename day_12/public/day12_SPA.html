@@ -15,8 +15,8 @@
                 <th>PRICE</th>
                 <th>COMPANY</th>
                 <th>YEAR</th>
-                <th>수정</th>
-                <th>삭제</th>
+                <th style = "width : 150px" >수정</th>
+                <th style = "width : 150px">삭제</th>
             </tr>
 <%
         for(var car of carList) {
@@ -27,7 +27,9 @@
                 <td><%=car.price %></td>
                 <td><%=car.company %></td>
                 <td><%=car.year %></td>
-                <td><button class="modifyBtn" data-no="<%=car.no %>">수정</button></td>
+                <td>
+                    <button class="modifyBtn" data-no="<%=car.no %>">수정</button>
+                </td> 
                 <td><button class="delBtn" data-no="<%=car.no %>">삭제</button></td>
 
             </tr>
@@ -41,44 +43,57 @@
 
 <body>
     <h1>TEST PAGE</h1>
-    <form id="carForm">
+    <form id="carForm" name ="namename">
         <table>
             <caption>중고 차 정보 입력</caption>
             <tr>
                 <th>차종</th>
-                <td><input type="text" name="name" value="SORENTO" /></td>
-            </tr>
+                <td><input type="text" id = "name" name="name" value="SORENTO" /></td>
+            </tr> 
             <tr>
                 <th>가격</th>
-                <td><input type="text" name="price" value="4500" /></td>
+                <td><input type="text" id = "price" name="price" value="4500" /></td>
             </tr>
             <tr>
                 <th>회사</th>
-                <td><input type="text" name="company" value="KIA" /></td>
+                <td><input type="text" id = "company" name="company" value="KIA" /></td>
             </tr>
             <tr>
                 <th>연식</th>
-                <td><input type="text" name="year" value="2023" /></td>
+                <td><input type="text" id = "year" name="year" value="2023" /></td>
             </tr>
             <tr>
-                <th> </th>
-                <td><input type="submit" value="저장" /></td>
+                <th></th>
+                <td>
+                    <input type="submit" value="추가" />
+                </td> 
             </tr>
         </table>
     </form>
+    <button class ="modifysubmit">수정완료</button>
     <div id="carListBox"></div>
 
-    <div id = "carListBox"></div>
     
 
     <script>
+
+        var index2modify = 0;
         function drawList(carList) {
             var complie = _.template($("#carListTmp").html());
             var html = complie({carList});
             $("#carListBox").html(html);
 
             $("button.modifyBtn").click(function() {
-                console.log("modify no => ", $(this).data("no"));
+                var no = $(this).data("no");
+                index2modify = no;
+                console.log("modify no => ", no);
+                $.get("/car", function(data, status, xhr){
+                    console.log(data);
+                    $("#name")[0].value = data[no].name;
+                    $("#price")[0].value = data[no].price;
+                    $("#company")[0].value = data[no].company;
+                    $("#year")[0].value = data[no].year;
+                });
 
             });
 
@@ -86,9 +101,30 @@
                 console.log("del no => ", $(this).data("no"));
                 var paramData = {no : $(this).data("no")};
                 $.post("/car/delete", paramData, function(data, status, xhr){
-                    console.log(paramData);
+                    console.log(data);
                     drawList(data);
                 });
+            });
+
+            $("button.modifysubmit").click(function(){
+                console.log("mod no => ", index2modify);
+                var name = document.getElementById("name").value;
+                var price = document.getElementById("price").value;
+                var company = document.getElementById("company").value;
+                var year = document.getElementById("year").value;
+                var paramData = {
+                    no : index2modify,
+                    name : name,
+                    price : price,
+                    company : company,
+                    year : year
+                }
+                console.log(paramData); 
+                $.post("/car/modify", paramData, function(data, status, xhr){
+                    
+                    drawList(data);
+                });
+
             });
         }
 
@@ -112,6 +148,8 @@
                     drawList(data);
                 });
             });
+
+
         });
     </script>
 

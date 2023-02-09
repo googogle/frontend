@@ -67,9 +67,10 @@ app.use(express.json());
 //post방식의 요청 처리 기능
 //post 요청에서 파라미터를 받기위해서 body-parser 미들웨어 필요
 //테스트는 postman으로
-let no = 10;
+let no = 0;
 app.post("/car", (req, res)=>{
     let carObj = req.body;
+    no = carList.length;
     console.log("POST - /car");
     console.log(req.body);
     carObj.no = no++;
@@ -80,7 +81,10 @@ app.post("/car", (req, res)=>{
 //수정기능
 app.post("/car/modify", (req, res)=>{
     console.log("POST - /car/modify")
-
+    var no = req.body.no;
+    console.log("Changed Element Index : " ,no);
+    carList.splice(no,1,req.body);
+    console.log(carList);
     res.send(carList);
 
 });
@@ -88,7 +92,10 @@ app.post("/car/modify", (req, res)=>{
 //삭제기능
 app.post("/car/delete", (req, res)=>{
     console.log("POST - /car/delete")
-    console.log("data : " , req.body);
+    console.log("data index to delete : " , req.body.no);
+    carList.splice((req.body.no),1);
+    console.log("carList length : ", carList.length);
+    for(var i = 0 ; i < carList.length; i ++) {carList[i].no = i };
     res.send(carList);
 
 });
