@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="http://code.jquery.com/jquery.js"></script>
+    <style>
+        div#contents{
+            position: absolute;
+        }
+
+        div#contents >div{
+            background-color: aquamarine;
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            border : 1px solid black;
+            display : none;
+        }  
+
+        div#contents>div.card:nth-child(1){
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div id ="btns">
+        <button data-no ="1">B1</button>
+        <button data-no ="2">B2</button>
+        <button data-no ="3">B3</button>
+    </div>
+
+    <div id ="contents">
+        <div class = "card">B1 contnent</div>
+        <div class = "card">B2 contnent</div>
+        <div class = "card">B3 contnent</div>
+    </div>
+
+    <script>
+        $(document).ready(function(){
+            colors = ["red", "green", "blue"];
+            $("div#btns > button").on('click', function(event){
+                console.log($(this).data("no"));
+                let no = $(this).data("no");
+                $("div#contents>div.card").hide();
+                $("div#contents>div.card:nth-child("+no+")").fadeIn('slow',function(){
+                    $("body").css("background-color", colors[no-1]);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
