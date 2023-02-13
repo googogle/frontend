@@ -42,3 +42,7 @@ input:disabled {
   background-color: white;
   color: black;
 }
+
+input:disabled#done{
+  text-decoration: line-through;
+}
