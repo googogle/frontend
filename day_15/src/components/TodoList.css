@@ -1,0 +1,9 @@
+input:disabled {
+  border: 1px;
+  background-color: white;
+  color: black;
+}
+
+input:disabled#done {
+  text-decoration: line-through;
+}

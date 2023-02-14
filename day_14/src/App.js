@@ -1,18 +1,23 @@
 import React, { useState } from "react";
 import "./App.css";
 
-function ItemRow({ item, removeItem}) {
+function ItemRow({ item, removeItem }) {
   return (
     <li>
       <p>
         <input
           type="checkbox"
           onChange={(e) => {
-            c_boxOnChange(item, e.target, removeItem);
+            c_boxOnChange(item, removeItem);
           }}
-          checked = {item.done}
+          checked={item.done}
         />
-        <input type="text" value={item.title} id = {item.done ? "done" : "notYet"} disabled />
+        <input
+          type="text"
+          value={item.title}
+          id={item.done ? "done" : "notYet"}
+          disabled
+        />
         <button
           onClick={(e) => {
             removeItem(item.no);
@@ -50,7 +55,7 @@ function InputItem({ appendItem }) {
 }
 
 // Redux를 이용하면 해결된다.
-function TodoList({ todoList, removeItem , saveList}) {
+function TodoList({ todoList, removeItem, saveList }) {
   return (
     <div>
       <ul>
@@ -61,30 +66,38 @@ function TodoList({ todoList, removeItem , saveList}) {
               item={item}
               removeItem={removeItem}
               cBoxOnChange={c_boxOnChange}
-              saveList = {saveList}
+              saveList={saveList}
             />
           );
         })}
       </ul>
     </div>
   );
-
 }
 
 function App(props) {
   const [noCount, setNoCount] = useState();
-  const [todoList, setTodoList] = useState(()=>{
-    let list = JSON.parse(localStorage.getItem('todoList'));
-    if(list) {setNoCount(list.length+1);  return list;}
-    else return [{no : 1 , title : "TEST", done:false}];
-  
+  const [todoList, setTodoList] = useState(() => {
+    let list = JSON.parse(localStorage.getItem("todoList"));
+    if (list) {
+      setNoCount(list.length + 1);
+      return list;
+    } else {
+      setNoCount(1);
+      return [{ no: 1, title: "TEST", done: false }];
+    }
   });
-
 
   function appendItem(newItem) {
     console.log(noCount);
     setTodoList([...todoList, { no: noCount, title: newItem, done: false }]);
-    localStorage.setItem("todoList", JSON.stringify([...todoList, { no: noCount, title: newItem, done: false }]));
+    localStorage.setItem(
+      "todoList",
+      JSON.stringify([
+        ...todoList,
+        { no: noCount, title: newItem, done: false },
+      ])
+    );
     setNoCount(noCount + 1);
   }
   function removeItem(no) {
@@ -101,15 +114,14 @@ function App(props) {
       <h1>Todo List</h1>
       <InputItem appendItem={appendItem} />
       <hr />
-      <TodoList todoList={todoList} removeItem={removeItem}/>
+      <TodoList todoList={todoList} removeItem={removeItem} />
     </>
   );
 }
 
-function c_boxOnChange(item, checkbox, removeItem) {
-  if(checkbox.checked) item.done = true;
-  else item.done = false;
-  removeItem(false);
+function c_boxOnChange(item, removeItem) {
+  item.done = !item.done;
+  removeItem(0);
 }
 
 export default App;

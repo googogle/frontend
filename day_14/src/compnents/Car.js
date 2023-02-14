@@ -1,4 +1,4 @@
-//컴포는터 생성
+//컴포넌트 생성
 function Car(props) {
   return (
     <h2>
