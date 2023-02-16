@@ -25,7 +25,7 @@
         <input type="submit" value="save" />
       </form>
     </div>
-    <table width = "100%">
+    <table width = "100%" height = "50%">
       <tr>
         <td width = "15%">No</td>
         <td width = "15%">Check</td>
@@ -33,7 +33,6 @@
         <td width = "15%">Del</td>
         <td width = "15%">Mod</td>
       </tr>
-
     <!--ejs 문서시작-->
     <% 
     //자바스크립트로 작성 
@@ -41,21 +40,20 @@
     <!--HTML로작성-->
     <tr>
       <td class = "no"> <%=task.no%> </td>
-      <td><input type = "checkbox" id ="<%=task.no%>"/></td>
-      <td>
-        <input type="text" class = "Title" value = "<%=task.title%>" id = "<%=task.no%>" deco ="<%=task.done%>" disabled>
-      </td>
-      <td><input type = "button" id = "del" value = "Del" /></td>
-      <td><input type = "button" id = "mod" value = "Mod"  title = "<%=task.title%>" /></td><br/>
+      <td><input type = "checkbox" id ="<%=task.no%>" data-done = "<%=task.done%>" /></td>
+      <td><input type="text" class = "Title" value = "<%=task.title%>" id = "<%=task.no%>"
+        deco ="<%=task.done%>" disabled></td>
+      <td><input type = "button" id = "del" value = "Del" data-idx = "<%=task.no%>"/></td>
+      <td><input type = "button" id = "mod" value = "Mod"  title = "<%=task.title%>" /></td>
     </tr>
     <% } %>
   </table>
 
   <script>
+    var checkDOM = $(":checkbox");
     var len = $("input:checkbox").length;
-    for (var i = 0; i<len ; i++){
-      console.log(i);
-    }
+    for (var i = 0 ; i < len ; i ++)
+      if(checkDOM[i].dataset.done == "true") checkDOM[i].checked = true;
 
     $("input#mod").click(function(){
       var titleDOM = $(this).parent().parent().find("input.Title")[0];
@@ -77,7 +75,12 @@
 
       }
       console.log("mod clicked")
-    })
+    });
+
+    $("input#del").click(function(){
+      let url = `/todoList/delete?idx=${$(this)[0].dataset.idx-1}`
+      location.assign(url);
+    });
 
     $("input:checkbox").click(function(){
       var idx = $(this)[0].id;
@@ -86,6 +89,5 @@
     })
 
   </script>
-
   </body>
 </html>

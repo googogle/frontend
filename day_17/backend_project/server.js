@@ -23,9 +23,9 @@ app.get("/home", (req, res) => {
 });
 
 const todoList = [
-  { no: 1, title: "AAA", done: true },
+  { no: 1, title: "AAA", done: false },
   { no: 2, title: "BBB", done: false },
-  { no: 3, title: "CCC", done: true },
+  { no: 3, title: "CCC", done: false }
 ];
 
 let todoListLen = 4;
@@ -46,7 +46,7 @@ app.post("/todoList", (req, res) => {
   //post방식에서 파라미터 받기위해 bodyParser 미들웨어를 사용해야함.
   //express.json(). express.urlencoded() 미들웨어로 설정
   console.log(req.body.newTask);
-  todoList.push({ no: todoListLen++, title: req.body.newTask, done: true });
+  todoList.push({ no: todoListLen++, title: req.body.newTask, done: false });
   //저장 후 목록갱신
   res.redirect("/todoList");
 });
@@ -62,7 +62,6 @@ app.get("/todoList/update", (req, res) => {
   let idx = req.query.idx;
   let title = req.query.title;
 
-  todoList[idx-1].done = !todoList[idx-1].done;
   todoList[idx-1].title = title;
   res.redirect("/todoList");
 });
@@ -71,7 +70,19 @@ app.get("/todoList/checkupdate", (req, res) => {
   console.log("GET - /todoList/update");
   let idx = req.query.idx;
   todoList[idx-1].done = !todoList[idx-1].done;
-  //console.log( todoList[idx-1].done);
+
+  res.redirect("/todoList");
+});
+
+app.get("/todoList/delete", (req, res) => {
+  console.log("GET - /todoList/delete");
+  let idx = req.query.idx;
+
+  todoList.splice(idx,1);
+  for(var i = 0 ; i < todoList.length ; i ++) todoList[i].no = i + 1;
+  
+  todoListLen = todoList.length +1;
+
   res.redirect("/todoList");
 });
 
