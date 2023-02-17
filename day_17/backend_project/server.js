@@ -4,6 +4,8 @@ const app = express();
 const cors = require("cors");
 
 app.set("port", 3000);
+
+//ejs 뷰엔진을 사용하기 위한 설정
 app.set("views", __dirname + "/views"); // prefix
 app.set("view engine", "ejs"); // suffix
 
