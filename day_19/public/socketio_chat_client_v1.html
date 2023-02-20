@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script> -->
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        //var socket = io.connect("http://localhost:3000");
+        var socket = io();
+        var chatSocket = io.connect("http://localhost:3000/chat");
+        var newsSocket = io.connect("http://localhost:3000/news");
+
+        chatSocket.on("connect", function(){
+            console.log("chat socket connected");
+            chatSocket.on("chat",(data)=>{
+                console.log(data);
+            })
+        })
+
+        chatSocket.on("connect", function(){
+            console.log("news socket connected");
+            newsSocket.on("news",(data)=>{
+                console.log(data);
+            })
+        })
+
+        // 서버에서 보낸 메세지 받아보기
+        socket.on("news", function(data) {
+            console.log(data);
+            socket.emit("hi", "client sent this message");
+        });
+
+        socket.on("this", function(data) {
+            console.log(data);
+            console.log(data.will);
+        });
+
+        socket.emit("private message", "user1", "hi");
+    </script>
+</body>
+</html>
