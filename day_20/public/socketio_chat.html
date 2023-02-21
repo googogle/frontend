@@ -14,7 +14,7 @@
         } 
     </style>
 </head>
-<br>
+<body>
     <button id="connectBtn">연결하기</button>
     <button id="closeBtn">접속 해제</button>
     <hr/>
@@ -23,11 +23,11 @@
     <input id="userMessage" value="테스트01입니다.">
     <button id="loginBtn">로그인</button>
     <hr/>
-    To <input type="text" id = receiveId value = ""/></br>
-    Message <input type="text" id = sendMsg value = ""/>
-    <input type="button" id = "sendBtn" value = "send">
-    <div id="messageView">--- Message ---<br/></div>
-
+    받는이 ID : <input id="receiveId" value="test01"/><br/>
+    전송 메세지 : <input id="sendMsg" value="hello"/><br/>
+    <button id="sendBtn">전송</button>
+    <hr/>
+    <div id="messageView">--- 메세지 보이는 영역 ---<br/></div>
 
 
     <!-- <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script> -->
@@ -35,28 +35,30 @@
     <script>
         var socket = null;
         var userId = null;
+
         function connection()  {
             socket = io.connect("http://localhost:3000");
             socket.on("connect", function() {
                 console.log("socket server에 연결 됨.");
-            });
 
-            socket.on("drowMessage", function(data) {
-                console.log(data);
-                let newLine = $("div#messageView").html() + data.sender+": " + data.msg + "<br/>";
-                $("div#messageView").html(newLine);
+                socket.on("send message", function(data) {
+                    console.log(data);
+                    let newLine = $("div#messageView").html() + data.sender+": " + data.msg + "<br/>";
+                    $("div#messageView").html(newLine);
+                });
             });
         }
 
+
         $("#sendBtn").click(function(e) {
-            userId = $("#userId").val();
-            socket.emit("send", {
-                sender : userId,
-                receiver : $("#receiveId").val(),
-                message : $("#sendMsg").val()
-            });
-            let newLine = $("div#messageView").html() + $("#userId").val()+": " + $("#sendMsg").val() + "<br/>";
-            $("div#messageView").html(newLine);
+            if(socket) {
+                let sendData = {
+                    sender : userId,
+                    receive : $("#receiveId").val(),
+                    msg : $("#sendMsg").val()
+                }
+                socket.emit("send", sendData);
+            }
         });
 
         $("#connectBtn").click(function(e){
@@ -70,18 +72,17 @@
         });
 
         $("#loginBtn").click(function(e) {
+            userId = $("#userId").val();
             if(socket) {
                 socket.emit("login", {
-                    userId : $("#userId").val(),
+                    userId : userId,
                     userName : $("#userName").val(),
                     userMessage : $("#userMessage").val()
                 });
             } else {
                 alert("소켓 연결 먼저 하시오.");
-                $("#connectBtn").focus();
             }
         });
-
         
     </script>
 </body>

@@ -52,40 +52,44 @@ let upload = multer({
 // http로 접속하면 실행 된다.
 router.route("/home").get((req, res) => {
   res.writeHead(200, {"Content-Type": "text/html; charset=utf8"});
-  res.write("<h1>Chat Test Page</h1>");
+  res.write("<h1>길동이의 홈페이지</h1>");
   res.end(); 
 });
 
 ////////
 // 접속한 소켓을 저장하는 객체 준비
 const clientSocketMap = {};
-
 // 클라이언트가 socket으로 접속하면 실행
 io.sockets.on("connection", (socket)=>{
   console.log("소켓으로 접속 됨.");
+
+  socket.on('linesend', function(data) {
+    console.log(data);
+    socket.broadcast.emit('linesend_tocllinet', data);
+  });
 
   socket.on("login", function(data) {
     data.socketId = socket.id;
     clientSocketMap[data.userId] = data;
     console.dir(clientSocketMap);
-    //console.log(io.sockets.sockets.get(socket.id));
-  })
-
+  });
   socket.on("send", function(data) {
-    let receiverSocketId = clientSocketMap[data.receiver].socketId;
-    let receiverSocket = io.sockets.sockets.get(receiverSocketId);
-      receiverSocket.emit("drowMessage", {
-        sender:data.sender,
-        msg : data.message
-      });
+    //console.log(io.sockets.sockets.get(socket.id));
+    if(data.receive === "All") {
+      io.sockets.emit("send message", data);
+      return;
+    }
+    let test01SocketId = clientSocketMap[data.receive].socketId;
+    if(test01SocketId) {
+      let test01Socket = io.sockets.sockets.get(test01SocketId);
+      test01Socket.emit("send message", data);
+    }
   });
 
   socket.on("disconnect", function() {
     console.log("/chat 클라이언트 접속이 해제 됨.");
   });
 });
-
-
 
 app.use("/", router);
 /////// error handler -----
