@@ -1,0 +1,9 @@
+--2.28--
+h2콘솔 실행 후 Generic H2(Embedded) 선택 후 연결 -> 뒤로가기 -> Generic H2(Server)선택 후 연결. //초기 설정
+
+이클립스 마켓플레이스 -> eclips web developer Tools 3.19 설치
+
+이클립스 data Source explore의 Database Connections에 h2 database 사용 설정
+
+프로젝트 Java buildpath설정에서 ClassPaht에 h2 jar파일 설정(main()에서 사용) 또는 WEB-INF\lib에 h2 jar파일붙여넣기(WEB에서 사용)
+--2.28--
