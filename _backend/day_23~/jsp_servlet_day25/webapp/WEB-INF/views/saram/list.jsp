@@ -7,7 +7,7 @@
 <!-- JSP 선언문 : 자바 Class의 멤버 필드, 멤버 메서드 선언하는 부분이다. -->
 <%!
 // JSP 선언문 : 이곳에는 멤버필드(전역변수)와 멤버메서드(전역함수)를 선언 할 수 있다.
-private String username = "김범준";
+private String username = "Lee";
 public String hello() {
 	return "Hello " + username + " world";
 }

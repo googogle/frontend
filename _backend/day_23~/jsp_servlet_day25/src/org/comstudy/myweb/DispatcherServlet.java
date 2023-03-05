@@ -11,19 +11,33 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.comstudy.myweb.board.model.BoardDTO;
+import org.comstudy.myweb.saram.model.SaramDAO;
 import org.comstudy.myweb.saram.model.SaramDTO;
 
 public class DispatcherServlet extends HttpServlet {
+
+	private String encodingWork(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		req.setCharacterEncoding("UTF-8");
+		resp.setCharacterEncoding("UTF-8");
+		resp.setContentType("text/html; charset=UTF-8");
+
+		// path 만들기
+		String ctxPath = req.getContextPath();
+		String reqUri = req.getRequestURI();
+		int beginIndex = ctxPath.length();
+		String path = reqUri.substring(beginIndex);
+		System.out.println("path >>>> " + path);
+		// 하위 컨트롤러에서 path를 사용하도록 req에 저장
+		req.setAttribute("path", path);
+		return path;
+	}
+
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		System.out.println("doGet() - DispatcherServlet 요청");
 
 		// path만들기
-		String ctxPaht = req.getContextPath();
-		String reqUrl = req.getRequestURI();
-		String path = reqUrl.substring(ctxPaht.length());
-
-		req.setAttribute("path", path);
+		String path = encodingWork(req, resp);
 
 		Controller controller = new SaramController();
 
@@ -40,28 +54,17 @@ public class DispatcherServlet extends HttpServlet {
 
 	}
 
-	protected void testSaramService(HttpServletRequest req) {
-		System.out.println("testSaramService() 실행");
-		// SaramDTO 객체(Bean)가 저장된 List를 view 페이지에 전달 하기.
-		SaramDTO saram = new SaramDTO(1, "hong", "홍길동", 25);
-		req.setAttribute("saram", saram);
-
-		ArrayList<SaramDTO> list = new ArrayList<SaramDTO>();
-		list.add(new SaramDTO(2, "hong2", "홍길동2", 26));
-		list.add(new SaramDTO(3, "hong3", "홍길동3", 23));
-		list.add(new SaramDTO(4, "hong4", "홍길동4", 22));
-		req.setAttribute("list", list);
-	}
+	SaramDAO saramDAO = new SaramDAO();
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String id = req.getParameter("id");
 		String name = req.getParameter("name");
-		int age = Integer.parseInt(req.getParameter("id") == null ? "0" : req.getParameter("id"));
-		
-		SaramDTO dto = new SaramDTO(0,id,name,age);
-		System.out.println(dto);
-		
-		resp.sendRedirect("/saram/list.do");
+		int age = Integer.parseInt(req.getParameter("age") == null ? "0" : req.getParameter("age"));
+
+		SaramDTO dto = new SaramDTO(0, id, name, age);
+		saramDAO.save(dto);
+
+		resp.sendRedirect(req.getContextPath() + "/saram/list.do");
 	}
 }

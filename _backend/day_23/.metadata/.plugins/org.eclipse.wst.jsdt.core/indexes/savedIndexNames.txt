@@ -1,0 +1,3 @@
+INDEX VERSION 1.4+C:\2023\front\_backend\day_23\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
+2118189043.index
+3316614023.index

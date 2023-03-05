@@ -1,4 +1,4 @@
-<%@page import="org.comstudy.myweb.dbcp.jdbcUtil"%>
+<%@page import="org.comstudy.myweb.dbcp.JdbcUtil_jdbc"%>
 <%@page import="java.sql.Connection"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -10,9 +10,9 @@
 </head>
 <body>
 	<%
-		Connection conn = jdbcUtil.getConnection();
-	out.println(conn);
-	jdbcUtil.close(conn);
+		Connection conn = JdbcUtil_jdbc.getConnection();
+			out.println(conn);
+			JdbcUtil_jdbc.close(conn);
 	%>
 </body>
 </html>

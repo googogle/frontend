@@ -1,0 +1,20 @@
+package com.person.proj.spring;
+
+import com.person.day23.spring.PersonDTO;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+public class PersonDTO {
+	@AllArgsConstructor
+	@NoArgsConstructor
+	@Data
+	public class PersonDTO {
+	   private int idx;
+	   private String id;
+	   private String name;
+	   private int age;
+	}
+
+}
