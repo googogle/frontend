@@ -7,7 +7,7 @@
 	<!-- 영속성 유닛 -->
 	<!-- 일반적으로 연결할 데이터베이스당 하나의 영속성 유닛을 등록 -->
 	<persistence-unit name="BoardWeb">
-		<class>org.comstudy.boardweb.domain.BoardEntity</class>
+		<class>com.springboot.boardweb.domain.BoardEntity</class>
 		<properties>
 			<!-- 필수 속성 -->
 			<property name="javax.persistence.jdbc.driver" value="org.h2.Driver" /> <!-- JDBC 드라이버 -->

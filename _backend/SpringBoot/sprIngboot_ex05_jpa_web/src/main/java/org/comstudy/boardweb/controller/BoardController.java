@@ -23,7 +23,7 @@ public class BoardController {
 	public String boardList(Model model) {
 		List<Board> list = boardService.selectAll();
 		System.out.println(list);
-		
+		log.info("list -> " + list.toString());
 		model.addAttribute("list", list);
 		return "board/list";
 	}
